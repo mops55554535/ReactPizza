@@ -1,24 +1,24 @@
-import pizzas from "./assets/pizzas.json";
 import Header from "./components/Header";
-import Categories from "./components/Categories";
-import Sort from "./components/Sort";
-import PizzaBlock from "./components/PizzaBlock";
 import "./scss/app.scss";
-
+import React, { useEffect, useState} from "react";
+import Home from "./pages/Home";
+import NotFoundBlock from "./NotFoundBlock";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Cart from "./pages/Cart"
 function App() {
+  
+
+
   return (
     <div className="App">
       <div className="layoutMain">
         <Header />
-        <div className="layout1">
-          <Categories />
-          <Sort />
-        </div>
-        <div className="layout2">
-          {pizzas.map((obj) => (
-            <PizzaBlock {...obj} key={obj.imgUrl} />
-          ))}
-        </div>
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/cart" element={<Cart/>}/>
+            
+            <Route path="*" element={<NotFoundBlock/>}/>
+          </Routes>
       </div>
     </div>
   );

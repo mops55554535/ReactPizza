@@ -3,6 +3,11 @@
 .pizzaBlock {
   max-width: 350px;
 
+  .PizzaImg{
+    max-height: 233px  ;
+    max-width: 233px  ;
+  }
+
   .info {
     display: flex;
     flex-direction: column;
@@ -141,3 +146,4 @@
     }
   }
 }
+

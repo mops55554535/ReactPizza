@@ -1,9 +1,14 @@
+import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
+
+
 
 function Header() {
   return (
     <div className={styles.header}>
+    <Link to="/"> 
       <div className={styles.info}>
+      
         <div className={styles.logo}>
           <svg
             width="100"
@@ -85,6 +90,7 @@ function Header() {
             </defs>
           </svg>
         </div>
+        
         <div className={styles.text}>
           <h1 className={styles.title}>React Pizza</h1>
           <span className={styles.description}>
@@ -92,8 +98,9 @@ function Header() {
           </span>
         </div>
       </div>
-
+   </Link>
       <div className={styles.user}>
+        <Link className={styles.cardLink} to="/cart">
         <div className={styles.cost}>520 RUB</div>
         <div className={styles.items}>
           <div className={styles.cart}>
@@ -126,7 +133,9 @@ function Header() {
           </div>
           <div className={styles.number}>3</div>
         </div>
+        </Link>
       </div>
+      
     </div>
   );
 }

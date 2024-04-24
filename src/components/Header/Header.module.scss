@@ -1,5 +1,26 @@
 @import "../../scss/variables";
-
+a {
+text-decoration: none;
+outline: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+  color: $yellowDark;
+}
+.cardLink{
+  text-decoration: none;
+outline: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+  color: white;
+}
 .header {
   display: flex;
   justify-content: space-between;
@@ -27,7 +48,7 @@
         text-transform: uppercase;
       }
       .description {
-        color: $yellowDark;
+        color: $yellowDark !important;
         font-weight: 600;
         text-transform: lowercase;
         font-size: 15px;

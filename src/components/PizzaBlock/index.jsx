@@ -11,7 +11,7 @@ function PizzaBlock({ title, price, imgUrl, sizes, types }) {
       <div className={styles.info}>
         <div className={styles.about}>
           <div className={styles.image}>
-            <img src={imgUrl} alt="Pizza" />
+            <img src={imgUrl} className={styles.PizzaImg} alt="Pizza" />
           </div>
           <div className={styles.title}>{title}</div>
         </div>

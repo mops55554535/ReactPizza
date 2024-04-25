@@ -1,8 +1,10 @@
 @import "../../scss/variables";
 
 .sort {
+  
   display: flex;
   gap: 10px;
+  justify-content: flex-end;
 
   .indicator {
     user-select: none;

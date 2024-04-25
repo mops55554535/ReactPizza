@@ -1,19 +1,38 @@
 @import "../../scss/variables";
-
+.categoriesWrapper{
+  display: flex;
+  justify-content: space-between;
+}
 .categories {
+  display: flex;
+  justify-content: space-between;
   user-select: none;
-  margin-bottom: 20px;
+  max-width: 70%;
+ 
+
+  @media screen and (max-width: 1020px) {
+    max-width: 100%;
+    display: flex;
+    margin-bottom: 30px;
+  }
 
   .list {
     display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    @media screen and (max-width: 1020px) {
+      justify-content: center;
+    }
 
     .item {
       cursor: pointer;
-      padding: 10px;
+      padding: 10px 20px;
       border-radius: 10px;
+      background-color: $yellow;
     }
     .item.active {
-      background-color: $red;
+      background-color: $yellowDark;
       color: $white;
     }
   }

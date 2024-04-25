@@ -1,14 +1,21 @@
 import React from 'react'
 // import NotFound from '../pages/NotFound'
-import style from "./NotFoundBlock.module.scss";
-export default function NotFoundBlock() {
+import styles from "./NotFoundBlock.module.scss";
+import { Link } from 'react-router-dom';
+
+function NotFoundBlock() {
   return (
-    <div>  
-        <div className={style.root}>
-        <div className="layout2">
-            <p className={style.notFoundText}>такого адреса нет /_/ </p>
-        </div>
-        </div>
+    <div className={styles.notFoundBlock}>
+      <span className={styles.emoji}>😕</span>
+      <h1 className={styles.title}>Страница не найдена</h1>
+      <p className={styles.text}>
+        К сожалению, данная страница отсутствует в нашем интернет-магазине
+      </p>
+      <Link className={styles.link} to="/">
+        Вернуться на главную
+      </Link>
     </div>
-  )
+  );
 }
+
+export default NotFoundBlock;

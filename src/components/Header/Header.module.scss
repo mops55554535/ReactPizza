@@ -1,34 +1,26 @@
 @import "../../scss/variables";
-a {
-text-decoration: none;
-outline: none;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-  color: $yellowDark;
-}
-.cardLink{
-  text-decoration: none;
-outline: none;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-  color: white;
-}
+
 .header {
   display: flex;
   justify-content: space-between;
   padding-bottom: 20px;
   margin-bottom: 30px;
 
+  @media screen and (max-width: 710px) {
+    flex-direction: column;
+  }
+
   .info {
     display: flex;
+
+    @media screen and (max-width: 710px) {
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    @media screen and (max-width: 470px) {
+      flex-direction: column;
+      text-align: center;
+    }
 
     .logo {
       display: flex;
@@ -36,6 +28,12 @@ outline: none;
       margin-right: 20px;
       margin-top: auto;
       margin-bottom: auto;
+
+      @media screen and (max-width: 470px) {
+        justify-content: center;
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
 
       svg {
         display: flex;
@@ -48,7 +46,7 @@ outline: none;
         text-transform: uppercase;
       }
       .description {
-        color: $yellowDark !important;
+        color: $yellowDark;
         font-weight: 600;
         text-transform: lowercase;
         font-size: 15px;
@@ -66,7 +64,17 @@ outline: none;
     border-radius: 10px;
     max-height: 35px;
 
+    @media screen and (max-width: 710px) {
+      justify-content: center;
+      max-height: none;
+      margin: 0 auto;
+    }
+    .cardLink{
+      display: flex;
+      gap: 8px;
+    }
     .cost {
+   
     }
     .items {
       display: flex;

@@ -4,6 +4,7 @@ import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 
+import styles from "./Home.module.scss";
 
 const Home = () => {
   const [items, setItems] = useState([])
@@ -22,7 +23,7 @@ useEffect(()=>{
 
   return (
     <div>
-         <div className="layout1">
+         <div className={styles.layout1}>
           <Categories />
           <Sort />
         </div>

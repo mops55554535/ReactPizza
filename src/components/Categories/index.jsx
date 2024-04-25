@@ -14,6 +14,7 @@ function Categories() {
   ];
 
   return (
+
     <div className={styles.categories}>
       <ul className={styles.list}>
         {categories.map((value, index) => (
@@ -29,6 +30,7 @@ function Categories() {
         ))}
       </ul>
     </div>
+
   );
 }
 

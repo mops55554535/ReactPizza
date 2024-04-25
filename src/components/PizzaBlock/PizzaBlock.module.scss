@@ -2,10 +2,8 @@
 
 .pizzaBlock {
   max-width: 350px;
-
-  .PizzaImg{
-    max-height: 233px  ;
-    max-width: 233px  ;
+  @media screen and (max-width: 810px) {
+    max-width: 450px;
   }
 
   .info {
@@ -20,6 +18,8 @@
 
         img {
           width: 100%;
+          max-width: 233px;
+          max-height: 233px;
         }
       }
       .title {
@@ -146,4 +146,3 @@
     }
   }
 }
-

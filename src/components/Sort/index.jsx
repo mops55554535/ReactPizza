@@ -1,15 +1,24 @@
 import React from "react";
 import styles from "./Sort.module.scss";
  
-function Sort() {
+function Sort({value, OnChangeSort}) {
   const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState(1);
-  const options = ["популярности", "цене", "алфавиту"];
+
+  const options = [
+  {name : "популярности(DESC)", sortProperty: 'rating'},
+  {name : "популярности(ABS)", sortProperty: '-title'},
+   {name : "цене(DESC)", sortProperty: 'price'},
+   {name : "цене(ASC)", sortProperty: '-price'},
+   {name : "алфавиту(DESC)", sortProperty: 'title'},
+   {name : "алфавиту(ACS)", sortProperty: '-title'},
+   
+];
+
   const onClickOption = (index) => {
-    setSelected(index);
+    OnChangeSort(index);
     setOpen(false);
   };
-  const optionSelected = options[selected];
+  
 
   return (
     <div className={styles.sort}>
@@ -26,18 +35,18 @@ function Sort() {
       </div>
       <div className={styles.text}>сортировать по</div>
       <div className={styles.options}>
-        <span onClick={() => setOpen(!open)}>{optionSelected}</span>
+        <span onClick={() => setOpen(!open)}>{value.name}</span>
         {open && (
           <ul className={styles.list}>
             {options.map((option, index) => (
               <li
                 className={`${styles.item} ${
-                  selected === index ? `${styles.active}` : ""
+                  value.sortProperty === option.sortProperty ? `${styles.active}` : ""
                 }`}
                 key={index}
-                onClick={() => onClickOption(index)}
+                onClick={() => onClickOption(option)}
               >
-                {option}
+                {option.name}
               </li>
             ))}
           </ul>

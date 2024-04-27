@@ -7,8 +7,11 @@ import Skeleton from "../components/PizzaBlock/Skeleton";
 
 import styles from "./Home.module.scss";
 import Pagination from "../Pagination";
+import { SearchContext } from "../App";
 
-const Home = ({searchValue}) => {
+const Home = () => {
+  const {searchValue } = React.useContext(SearchContext)
+
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [categoryId, setCategoryId] = useState(0)

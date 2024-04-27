@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 import Search from "../Search";
+import { SearchContext } from "../../App";
+import React from "react";
 
 
 
-function Header({searchValue, setSearchValue}) {
+function Header() {
+  
   return (
     <div className={styles.header}>
     <Link to="/"> 
@@ -100,7 +103,7 @@ function Header({searchValue, setSearchValue}) {
         </div>
       </div>
    </Link>
-   <Search searchValue= {searchValue} setSearchValue={setSearchValue} />
+   <Search/>
       <div className={styles.user}>
         <Link className={styles.cardLink} to="/cart">
         <div className={styles.cost}>520 RUB</div>

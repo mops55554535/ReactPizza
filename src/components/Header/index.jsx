@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
+import Search from "../Search";
 
 
 
-function Header() {
+function Header({searchValue, setSearchValue}) {
   return (
     <div className={styles.header}>
     <Link to="/"> 
@@ -99,6 +100,7 @@ function Header() {
         </div>
       </div>
    </Link>
+   <Search searchValue= {searchValue} setSearchValue={setSearchValue} />
       <div className={styles.user}>
         <Link className={styles.cardLink} to="/cart">
         <div className={styles.cost}>520 RUB</div>

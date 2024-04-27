@@ -7,15 +7,15 @@ import { Routes, Route } from "react-router-dom";
 import Cart from "./pages/Card/Cart";
 
 function App() {
+  const[searchValue, setSearchValue] = useState("")
   
-
 
   return (
     <div className="App">
       <div className="layoutMain">
-        <Header />
+        <Header searchValue= {searchValue} setSearchValue={setSearchValue} />
           <Routes>
-            <Route path="/" element={<Home/>}/>
+            <Route path="/" element={<Home searchValue= {searchValue}/>}/>
             <Route path="/cart" element={<Cart/>}/>
             
             <Route path="*" element={<NotFoundBlock/>}/>

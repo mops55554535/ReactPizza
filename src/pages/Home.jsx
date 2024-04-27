@@ -4,12 +4,15 @@ import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 
-import styles from "./Home.module.scss";
 
-const Home = () => {
+import styles from "./Home.module.scss";
+import Pagination from "../Pagination";
+
+const Home = ({searchValue}) => {
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [categoryId, setCategoryId] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
   const [sortType, setSortType] = useState({
     name: 'популярности',
     sortProperty: 'rating'
@@ -18,9 +21,11 @@ const Home = () => {
   const order = sortType.sortProperty.includes("-") ? 'asc' : 'desc'
   const sortBy = sortType.sortProperty.replace('-', '')
   const category = categoryId > 0 ? `category=${categoryId}`: ``
+  const search = searchValue  ? `&search=${searchValue}`: ``
+  
 useEffect(()=>{
   setLoading(true)
-    fetch(`https://6629232654afcabd07385199.mockapi.io/Items?${category}&sortBy=${sortBy}&order=${order}` )
+    fetch(`https://6629232654afcabd07385199.mockapi.io/Items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}` )
 
     .then((res) =>{
       return res.json()})
@@ -28,9 +33,12 @@ useEffect(()=>{
       setItems(arr) 
       setLoading(false)
     })
-  },[categoryId, sortType])
+  },[categoryId, sortType, searchValue,currentPage])
 
-console.log(categoryId, sortType )
+
+const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)
+
+const skeletons =  [...new Array(4)].map((_, index) => <Skeleton key={index} />)
   return (
     <div>
          <div className={styles.layout1}>
@@ -38,12 +46,10 @@ console.log(categoryId, sortType )
           <Sort value={sortType} OnChangeSort={(i) =>setSortType(i)}/>
         </div>
         <div className="layout2">
-          {
-            loading 
-            ? [...new Array(6)].map((_, index) => <Skeleton key={index} />) 
-            : items.map((obj) => <PizzaBlock key={obj.id} {...obj}/> )
-          }
+          { loading ? skeletons : pizzas }
         </div>
+       <Pagination onChangePage ={(number) => setCurrentPage(number)} />
+
     </div>
   )
 }

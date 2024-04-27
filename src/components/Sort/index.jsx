@@ -4,7 +4,7 @@ import styles from "./Sort.module.scss";
 function Sort({value, OnChangeSort}) {
   const [open, setOpen] = React.useState(false);
 
-  const options = [
+  const optionsTypes = [
   {name : "популярности(DESC)", sortProperty: 'rating'},
   {name : "популярности(ABS)", sortProperty: '-title'},
    {name : "цене(DESC)", sortProperty: 'price'},
@@ -38,7 +38,7 @@ function Sort({value, OnChangeSort}) {
         <span onClick={() => setOpen(!open)}>{value.name}</span>
         {open && (
           <ul className={styles.list}>
-            {options.map((option, index) => (
+            {optionsTypes.map((option, index) => (
               <li
                 className={`${styles.item} ${
                   value.sortProperty === option.sortProperty ? `${styles.active}` : ""

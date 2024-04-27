@@ -12,7 +12,7 @@ const Home = () => {
   const [categoryId, setCategoryId] = useState(0)
   const [sortType, setSortType] = useState({
     name: 'популярности',
-    sortProperty: 'raiting'
+    sortProperty: 'rating'
   })
 
   const order = sortType.sortProperty.includes("-") ? 'asc' : 'desc'
@@ -28,7 +28,7 @@ useEffect(()=>{
       setItems(arr) 
       setLoading(false)
     })
-  },[categoryId])
+  },[categoryId, sortType])
 
 console.log(categoryId, sortType )
   return (

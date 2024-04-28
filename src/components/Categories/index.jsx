@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Categories.module.scss";
 
-function Categories({value, OnChangeCategory}) {
+function Categories({categoryId, onChangeCategory}) {
  
   const categories = [
     "Все",
@@ -20,10 +20,10 @@ function Categories({value, OnChangeCategory}) {
           <li
 
             className={`${styles.item} ${
-              value === index ? `${styles.active}` : ""
+              categoryId === index ? `${styles.active}` : ""
             }`}
             key={index}
-            onClick={() => OnChangeCategory(index)}
+            onClick={() => onChangeCategory(index)}
           >
             {categoryName}
           </li>

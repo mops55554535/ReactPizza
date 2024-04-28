@@ -37,7 +37,7 @@
     "source.fixAll.eslint": "explicit"
   },
 
-  "workbench.colorTheme": "Bearded Theme feat. Gold D Raynh",
+  "workbench.colorTheme": "Solarized Dark",
 
   "terminal.integrated.rendererType": "dom",
 

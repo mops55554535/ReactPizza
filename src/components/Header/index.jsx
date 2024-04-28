@@ -103,7 +103,7 @@ function Header() {
         </div>
       </div>
    </Link>
- 
+   <Search/>
       <div className={styles.user}>
         <Link className={styles.cardLink} to="/cart">
         <div className={styles.cost}>520 RUB</div>

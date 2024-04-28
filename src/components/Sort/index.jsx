@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./Sort.module.scss";
- 
-function Sort({value, OnChangeSort}) {
+import { useSelector, useDispatch } from "react-redux";
+import { setSort } from "../../Redux/slices/filterSlice";
+function Sort() {
+  const dispatch = useDispatch()
+  const sort = useSelector(state => state.filter.sort)
+
   const [open, setOpen] = React.useState(false);
 
   const optionsTypes = [
@@ -14,8 +18,9 @@ function Sort({value, OnChangeSort}) {
    
 ];
 
-  const onClickOption = (index) => {
-    OnChangeSort(index);
+  const onClickOption = (obj) => {
+    // OnChangeSort(index);
+    dispatch(setSort(obj))
     setOpen(false);
   };
   
@@ -35,13 +40,13 @@ function Sort({value, OnChangeSort}) {
       </div>
       <div className={styles.text}>сортировать по</div>
       <div className={styles.options}>
-        <span onClick={() => setOpen(!open)}>{value.name}</span>
+        <span onClick={() => setOpen(!open)}>{sort.name}</span>
         {open && (
           <ul className={styles.list}>
             {optionsTypes.map((option, index) => (
               <li
                 className={`${styles.item} ${
-                  value.sortProperty === option.sortProperty ? `${styles.active}` : ""
+                  sort.sortProperty === option.sortProperty ? `${styles.active}` : ""
                 }`}
                 key={index}
                 onClick={() => onClickOption(option)}

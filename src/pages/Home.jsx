@@ -30,27 +30,31 @@ const Home = () => {
   const {searchValue } = React.useContext(SearchContext)
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
- 
+  const isMounted = React.useRef(false)
+
   const onChangePage = (number) =>{
     dispatch(setCurrentPage(number))
   }
 
 const dispatch = useDispatch()
 const navigate = useNavigate()
-
+const isSeacrch = React.useRef(false)
 React.useEffect(() =>{
   if (window.location.search){  
     const params = qs.parse(window.location.search.substring(1));
     const sort = optionsTypes.find((obj) => obj.sortProperty === params.sortProperty) 
+    console.log(sort)
    dispatch(
     setFilters({
     ...params,
     sort
     })
-   )
+   );
+   isSeacrch.current = true 
   }
 }, [])
-React.useEffect(() =>{
+
+function FetchPizzas(){
   setLoading(true)
   const order = sort.sortProperty.includes("-") ? 'asc' : 'desc'
   const sortBy = sort.sortProperty.replace('-', '')
@@ -62,16 +66,24 @@ React.useEffect(() =>{
       setLoading(false)
     })
 
-
+}
+React.useEffect(() =>{
+  if(!isSeacrch.current){
+    FetchPizzas()
+  }
+isSeacrch.current = false
 }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
 React.useEffect(() =>{
-  const quryString = qs.stringify({
-    sortProperty: sort.sortProperty,
-    categoryId,
-    currentPage,
-  })
-  navigate(`?${quryString}`)
+  if (isMounted.current){
+    const quryString = qs.stringify({
+      sortProperty: sort.sortProperty,
+      categoryId,
+      currentPage,
+    })
+    navigate(`?${quryString}`)
+  }
+  isMounted.current = true 
 }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
 const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)

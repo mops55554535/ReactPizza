@@ -4,10 +4,11 @@ import Search from "../Search";
 import { SearchContext } from "../../App";
 import React from "react";
 
-
+import { useSelector } from "react-redux";
 
 function Header() {
-  
+  const { items, totalPrice } = useSelector((state) => state.cart);
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0)
   return (
     <div className={styles.header}>
     <Link to="/"> 
@@ -106,7 +107,7 @@ function Header() {
    <Search/>
       <div className={styles.user}>
         <Link className={styles.cardLink} to="/cart">
-        <div className={styles.cost}>520 RUB</div>
+        <div className={styles.cost}>{totalPrice}</div>
         <div className={styles.items}>
           <div className={styles.cart}>
             <svg
@@ -136,7 +137,7 @@ function Header() {
               ></path>
             </svg>
           </div>
-          <div className={styles.number}>3</div>
+          <div className={styles.number}>{totalCount}</div>
         </div>
         </Link>
       </div>

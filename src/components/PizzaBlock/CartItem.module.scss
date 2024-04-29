@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .info {
+    display: flex;
+    align-items: center;
+
+    .image {
+      img {
+        max-width: 100px;
+      }
+    }
+  }
+  .number {
+    display: flex;
+  }
+  .delete {
+    cursor: pointer;
+  }
+}

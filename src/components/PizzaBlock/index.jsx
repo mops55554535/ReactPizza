@@ -1,11 +1,32 @@
 import React from "react";
 import styles from "./PizzaBlock.module.scss";
 
-function PizzaBlock({ title, price, imgUrl, sizes, types }) {
+import { addItem } from "../../Redux/slices/cartSlice";
+
+import {useSelector, useDispatch} from "react-redux"
+
+function PizzaBlock({id, titleBlock, price, imgUrl, sizes, types, rating }) {
+  const dispatch = useDispatch()
+
+  const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id))
+
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
-  const typeNames = ["тонкое", "традиционное"];
+  const typeNames = ["тонкое", "традиционное"]; 
 
+  const addedCount = cartItem ? cartItem.count : 0
+
+  const onClickAdd= () =>{
+    const item ={
+      id,
+      titleBlock,
+      price,
+      imgUrl,
+      type: typeNames[activeType],
+      size: sizes[activeSize]
+    }
+    dispatch(addItem(item))
+  }
   return (
     <div className={styles.pizzaBlock}>
       <div className={styles.info}>
@@ -13,7 +34,7 @@ function PizzaBlock({ title, price, imgUrl, sizes, types }) {
           <div className={styles.image}>
             <img src={imgUrl} className={styles.PizzaImg} alt="Pizza" />
           </div>
-          <div className={styles.title}>{title}</div>
+          <div className={styles.title}>{titleBlock}</div>
         </div>
         <div className={styles.options}>
           <div className={styles.type}>
@@ -51,7 +72,7 @@ function PizzaBlock({ title, price, imgUrl, sizes, types }) {
         <div className={styles.user}>
           <div className={styles.price}>от {price} RUB</div>
           <div className={styles.cart}>
-            <div className={styles.add}>
+            <div onClick = {onClickAdd} className={styles.add}>
               <button>
                 <div className={styles.plus}>
                   <svg
@@ -72,7 +93,7 @@ function PizzaBlock({ title, price, imgUrl, sizes, types }) {
                   </svg>
                 </div>
                 <div className={styles.text}>Добавить</div>
-                <div className={styles.indicator}>100</div>
+               { addedCount > 0 && <div className={styles.indicator}>{addedCount}</div>}
               </button>
             </div>
           </div>

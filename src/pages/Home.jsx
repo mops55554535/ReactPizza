@@ -20,6 +20,7 @@ import { SearchContext } from "../App";
 
 
 import styles from "./Home.module.scss";
+import { fetchPizzas } from "../Redux/slices/pizzaSlice";
 
 
 
@@ -28,13 +29,11 @@ const Home = () => {
   const { categoryId, sort} = useSelector((state) => state.filter)
   const [currentPage,setCurrentPage] = React.useState(1);
   const {searchValue } = React.useContext(SearchContext)
-  const [items, setItems] = useState([])
-  const [loading, setLoading] = useState(true)
+
   const isMounted = React.useRef(false)
 
-  const onChangePage = (number) =>{
-    dispatch(setCurrentPage(number))
-  }
+  const {status, items} = useSelector((state) => state.pizza)
+ 
 
 const dispatch = useDispatch()
 const navigate = useNavigate()
@@ -54,23 +53,29 @@ React.useEffect(() =>{
   }
 }, [])
 
-function FetchPizzas(){
-  setLoading(true)
+async function getPizzas(){
+  
   const order = sort.sortProperty.includes("-") ? 'asc' : 'desc'
   const sortBy = sort.sortProperty.replace('-', '')
   const category = categoryId > 0 ? `category=${categoryId}`: ``
   const search = searchValue  ? `&search=${searchValue}`: ``
-  axios.get(`https://6629232654afcabd07385199.mockapi.io/Items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-  ).then((res) =>{
-      setItems(res.data)  
-    
-      setLoading(false)
-    })
+  
 
-}
+    dispatch(fetchPizzas({
+      sortBy,
+      order,  
+      category,
+      search,
+      currentPage
+    }))  
+    
+  }
+  
+
+
 React.useEffect(() =>{
   if(!isSeacrch.current){
-    FetchPizzas()
+    getPizzas()
   }
 isSeacrch.current = false
 }, [categoryId, sort.sortProperty, searchValue, currentPage]);
@@ -107,7 +112,17 @@ const skeletons =  [...new Array(4)].map((_, index) => <Skeleton key={index} />)
         
         </div>
         <div className="layout2">
-          { loading ? skeletons : pizzas }
+          { status ===  'error' ? (
+             <div className={styles.root}>
+            <h2>
+             произошла ошибка <span>😕</span>
+            </h2>
+            <p>
+              <br />
+              Для того, чтобы заказать пиццу, перейди на главную страницу.
+            </p>
+            </div>
+            ): (status==='loading' ? skeletons : pizzas) }
         </div>
        <Pagination onChangePage={(number) => setCurrentPage(number)} />
 

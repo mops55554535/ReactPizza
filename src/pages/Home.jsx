@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from "react";
 
 import {useSelector, useDispatch} from "react-redux"
-import { setCategoryId } from "../Redux/slices/filterSlice";
+import { selectFilter, setCategoryId } from "../Redux/slices/filterSlice";
 import {setFilters} from '../Redux/slices/filterSlice'
 
 import axios  from "axios";
@@ -20,23 +20,28 @@ import { SearchContext } from "../App";
 
 
 import styles from "./Home.module.scss";
-import { fetchPizzas } from "../Redux/slices/pizzaSlice";
+import { fetchPizzas, selectPizzaData } from "../Redux/slices/pizzaSlice";
 
-
+import {setPageCurrent} from "../Redux/slices/filterSlice";
 
 
 const Home = () => {
-  const { categoryId, sort} = useSelector((state) => state.filter)
-  const [currentPage,setCurrentPage] = React.useState(1);
-  const {searchValue } = React.useContext(SearchContext)
-
-  const isMounted = React.useRef(false)
-
-  const {status, items} = useSelector((state) => state.pizza)
- 
-
-const dispatch = useDispatch()
+ const dispatch = useDispatch()
 const navigate = useNavigate()
+
+ const { categoryId, sort, currentPage, searchValue } =
+ useSelector(selectFilter);
+
+
+  const isMounted = React.useRef(false) 
+
+  const {status, items} = useSelector(selectPizzaData)
+ 
+  const onChangePage = (number) => {
+    dispatch(setPageCurrent(number));
+  };
+
+
 const isSeacrch = React.useRef(false)
 React.useEffect(() =>{
   if (window.location.search){  
@@ -124,8 +129,8 @@ const skeletons =  [...new Array(4)].map((_, index) => <Skeleton key={index} />)
             </div>
             ): (status==='loading' ? skeletons : pizzas) }
         </div>
-       <Pagination onChangePage={(number) => setCurrentPage(number)} />
-
+       <Pagination pageCurrent={currentPage} onChangePage={onChangePage}  />
+       {/* onChangePage={(number) => setCurrentPage(number)} */}
     </div>
   )
 }

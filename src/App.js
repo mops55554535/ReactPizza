@@ -7,14 +7,13 @@ import { Routes, Route } from "react-router-dom";
 import Cart from "./pages/Card/Cart";
 
 
-export const SearchContext = React.createContext()
+
 function App() {
-  const[searchValue, setSearchValue] = useState("")
-  
+
 
   return (
     <div className="App">
-      <SearchContext.Provider value= {{searchValue, setSearchValue}} >
+
       <div className="layoutMain">
         <Header  />
           <Routes>
@@ -24,8 +23,7 @@ function App() {
             <Route path="*" element={<NotFoundBlock/>}/>
           </Routes>
       </div>
-      </SearchContext.Provider>
-    </div>
+</div>
   );
 }
 

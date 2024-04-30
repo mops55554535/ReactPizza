@@ -5,7 +5,7 @@ import { addItem } from "../../Redux/slices/cartSlice";
 
 import {useSelector, useDispatch} from "react-redux"
 
-function PizzaBlock({id, titleBlock, price, imgUrl, sizes, types, rating }) {
+function PizzaBlock({id, title, price, imgUrl, sizes, types, rating }) {
   const dispatch = useDispatch()
 
   const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id))
@@ -19,7 +19,7 @@ function PizzaBlock({id, titleBlock, price, imgUrl, sizes, types, rating }) {
   const onClickAdd= () =>{
     const item ={
       id,
-      titleBlock,
+      title,
       price,
       imgUrl,
       type: typeNames[activeType],
@@ -34,7 +34,7 @@ function PizzaBlock({id, titleBlock, price, imgUrl, sizes, types, rating }) {
           <div className={styles.image}>
             <img src={imgUrl} className={styles.PizzaImg} alt="Pizza" />
           </div>
-          <div className={styles.title}>{titleBlock}</div>
+          <div className={styles.title}>{title}</div>
         </div>
         <div className={styles.options}>
           <div className={styles.type}>

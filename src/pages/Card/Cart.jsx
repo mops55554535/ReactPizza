@@ -98,7 +98,7 @@ function Cart() {
 
       <div className={styles.content}>
         <div className={styles.items}>
-          {items.map((item) => (
+        {items.map((item) => (
             <CartItem key={item.imgUrl} {...item} />
           ))}
         </div>

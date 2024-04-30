@@ -43,7 +43,7 @@ React.useEffect(() =>{
   if (window.location.search){  
     const params = qs.parse(window.location.search.substring(1));
     const sort = optionsTypes.find((obj) => obj.sortProperty === params.sortProperty) 
-    console.log(sort)
+    
    dispatch(
     setFilters({
     ...params,
@@ -63,6 +63,7 @@ function FetchPizzas(){
   axios.get(`https://6629232654afcabd07385199.mockapi.io/Items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
   ).then((res) =>{
       setItems(res.data)  
+    
       setLoading(false)
     })
 
@@ -88,7 +89,6 @@ React.useEffect(() =>{
 
 const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)
 const onChangeCategory = (id)=>{
-  
   dispatch(setCategoryId(id))
 }
 

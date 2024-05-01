@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import styles from "./Sort.module.scss";
-import { useSelector, useDispatch } from "react-redux";
+import {useSelector, useDispatch} from "react-redux"
 import { setSort } from "../../Redux/slices/filterSlice";
 
 
@@ -25,12 +25,13 @@ function Sort() {
 
   const onClickOption = (obj) => {
     // OnChangeSort(index);
+    
     dispatch(setSort(obj))
     setOpen(false);
   };
   React.useEffect(()=>{
     const handleClick = (e) =>{
-        let path = e.composedPath () 
+        let path = e.composedPath() 
         if(!path.includes(sortRef.current)){
          setOpen(false)
            

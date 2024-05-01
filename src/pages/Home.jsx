@@ -6,7 +6,7 @@ import {setFilters} from '../Redux/slices/filterSlice'
 
 import axios  from "axios";
 import qs from "qs";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
@@ -97,7 +97,7 @@ React.useEffect(() =>{
   isMounted.current = true 
 }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
-const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)
+const pizzas = items.map((obj) => <Link to={`/pizza/${obj.id}`} key={obj.id}><PizzaBlock  {...obj}/> </Link> )
 const onChangeCategory = (id)=>{
   dispatch(setCategoryId(id))
 }

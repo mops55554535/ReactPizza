@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import NotFoundBlock from "./NotFoundBlock";
 import { Routes, Route } from "react-router-dom";
 import Cart from "./pages/Card/Cart";
-import FullPizza from "./pages/FullPizza";
+import FullPizza from "./pages/FullPizza/FullPizza";
 
 
 
@@ -25,6 +25,7 @@ function App() {
             
             <Route path="*" element={<NotFoundBlock/>}/>
           </Routes>
+          
       </div>
 </div>
   );

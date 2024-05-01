@@ -4,10 +4,12 @@ import Search from "../Search";
 import { SearchContext } from "../../App";
 import React from "react";
 
+import {useLocation} from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../Redux/slices/cartSlice";
 
 function Header() {
+  const location= useLocation();
   const { items, totalPrice } = useSelector(selectCart);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0)
   return (
@@ -106,6 +108,7 @@ function Header() {
       </div>
    </Link>
    <Search/>
+   {location.pathname !== "/cart" &&  
       <div className={styles.user}>
         <Link className={styles.cardLink} to="/cart">
         <div className={styles.cost}>{totalPrice}</div>
@@ -142,7 +145,7 @@ function Header() {
         </div>
         </Link>
       </div>
-      
+      }
     </div>
   );
 }

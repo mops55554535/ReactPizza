@@ -3,7 +3,7 @@ import React from 'react'
 import styles from "./NotFoundBlock.module.scss";
 import { Link } from 'react-router-dom';
 
-function NotFoundBlock() {
+const NotFoundBlock:React.FC= () => {
   return (
     <div className={styles.notFoundBlock}>
       <span className={styles.emoji}>😕</span>

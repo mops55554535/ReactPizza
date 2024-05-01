@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 import Search from "../Search";
-import { SearchContext } from "../../App";
+
 import React from "react";
 
 import {useLocation} from "react-router-dom";
@@ -11,7 +11,7 @@ import { selectCart } from "../../Redux/slices/cartSlice";
 function Header() {
   const location= useLocation();
   const { items, totalPrice } = useSelector(selectCart);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+  const totalCount = items.reduce((sum: number, item:any) => sum + item.count, 0)
   return (
     <div className={styles.header}>
     <Link to="/"> 

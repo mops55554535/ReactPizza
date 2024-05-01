@@ -5,7 +5,18 @@ import { addItem, removeItem,minusItem, clearItems } from "../../Redux/slices/ca
 
 import styles from "./CartItem.module.scss";
 
-function CartItem({ id, title,sizes, type, size, price, count, imgUrl }) {
+type CartItemProps ={
+  id:string,
+  title: string,
+  sizes: number,
+  type: string,
+  size: number,
+  price: number,
+  count:number,
+  imgUrl:string
+}
+
+const CartItem:React.FC<CartItemProps> =  ({ id, title,sizes, type, size, price, count, imgUrl }) => {
   const dispatch = useDispatch();
 
   const onClickPlus = () => {

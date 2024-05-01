@@ -2,10 +2,18 @@ import React, { useRef } from "react";
 import styles from "./Sort.module.scss";
 import {useSelector, useDispatch} from "react-redux"
 import { setSort } from "../../Redux/slices/filterSlice";
+import { TypeElement } from "typescript";
 
-
-
-export const optionsTypes = [
+type SortItem = {
+  name: string,
+  sortProperty: string
+}
+type IState = {
+  state: any
+  filter: any
+  sort: any
+}
+export const optionsTypes:SortItem[] = [
   {name : "популярности(DESC)", sortProperty: 'rating'},
   {name : "популярности(ABS)", sortProperty: '-title'},
   {name : "цене(DESC)", sortProperty: 'price'},
@@ -14,23 +22,26 @@ export const optionsTypes = [
   {name : "алфавиту(ACS)", sortProperty: '-title'},
    
 ];
-
+type Isort = {
+  sort:any
+  
+}
 function Sort() {
   const dispatch = useDispatch()
-  const sort = useSelector(state => state.filter.sort)
-  const sortRef = React.useRef()
+  const sort:any = useSelector<IState>(state => state.filter.sort)
+  const sortRef = React.useRef<HTMLDivElement>(null)
   const [open, setOpen] = React.useState(false);
 
 
 
-  const onClickOption = (obj) => {
+  const onClickOption = (obj:SortItem) => {
     // OnChangeSort(index);
     
     dispatch(setSort(obj))
     setOpen(false);
   };
   React.useEffect(()=>{
-    const handleClick = (e) =>{
+    const handleClick = (e: any) =>{
         let path = e.composedPath() 
         if(!path.includes(sortRef.current)){
          setOpen(false)

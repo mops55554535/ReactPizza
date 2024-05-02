@@ -26,6 +26,11 @@ type Isort = {
   sort:any
   
 }
+
+type PopupClick = MouseEvent & {
+  path: Node[]
+} 
+
 function Sort() {
   const dispatch = useDispatch()
   const sort:any = useSelector<IState>(state => state.filter.sort)
@@ -41,12 +46,11 @@ function Sort() {
     setOpen(false);
   };
   React.useEffect(()=>{
-    const handleClick = (e: any) =>{
-        let path = e.composedPath() 
-        if(!path.includes(sortRef.current)){
-         setOpen(false)
-           
-        }
+    const handleClick = (e: MouseEvent) =>{
+      const _event = e as PopupClick
+       if(sortRef.current && !_event.path.includes(sortRef.current)){
+        setOpen(false)
+       }
       }
       document.body.addEventListener('click', handleClick)
       return() =>{

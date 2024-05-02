@@ -15,7 +15,6 @@ import Search from "../components/Search";
 import {optionsTypes} from '../components/Sort/index'
 
 import Pagination from "../Pagination";
-import { SearchContext } from "../App";
 
 
 
@@ -37,7 +36,7 @@ const navigate = useNavigate()
 
   const {status, items} = useSelector(selectPizzaData)
  
-  const onChangePage = (number) => {
+  const onChangePage = (number:any) => {
     dispatch(setPageCurrent(number));
   };
 
@@ -66,13 +65,15 @@ async function getPizzas(){
   const search = searchValue  ? `&search=${searchValue}`: ``
   
 
-    dispatch(fetchPizzas({
+    dispatch(
+        // @ts-ignore
+      fetchPizzas({
       sortBy,
       order,  
       category,
       search,
       currentPage
-    }))  
+    }))
     
   }
   
@@ -97,8 +98,8 @@ React.useEffect(() =>{
   isMounted.current = true 
 }, [categoryId, sort.sortProperty, searchValue, currentPage])
 
-const pizzas = items.map((obj) => <Link to={`/pizza/${obj.id}`} key={obj.id}><PizzaBlock  {...obj}/> </Link> )
-const onChangeCategory = (id)=>{
+const pizzas = items.map((obj:any) => <Link to={`/pizza/${obj.id}`} key={obj.id}><PizzaBlock  {...obj}/> </Link> )
+const onChangeCategory = (id:any)=>{
   dispatch(setCategoryId(id))
 }
 
@@ -128,8 +129,9 @@ const skeletons =  [...new Array(4)].map((_, index) => <Skeleton key={index} />)
             </p>
             </div>
             ): (status==='loading' ? skeletons : pizzas) }
-        </div>
-       <Pagination pageCurrent={currentPage} onChangePage={onChangePage}  />
+        </div>  
+        {  /*@ts-ignore*/ }
+       <Pagination  pageCurrent={currentPage} onChangePage={onChangePage}  />
        {/* onChangePage={(number) => setCurrentPage(number)} */}
     </div>
   )

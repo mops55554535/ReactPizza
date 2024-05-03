@@ -19,13 +19,14 @@ import Pagination from "../Pagination";
 
 
 import styles from "./Home.module.scss";
-import { fetchPizzas, selectPizzaData } from "../Redux/slices/pizzaSlice";
+import { fetchPizzas, SearchPizzaParams, selectPizzaData } from "../Redux/slices/pizzaSlice";
 
 import {setPageCurrent} from "../Redux/slices/filterSlice";
+import { useAppDispatch } from "../Redux/Store";
 
 
 const Home = () => {
- const dispatch = useDispatch()
+ const dispatch = useAppDispatch()
 const navigate = useNavigate()
 
  const { categoryId, sort, currentPage, searchValue } =
@@ -42,21 +43,7 @@ const navigate = useNavigate()
 
 
 const isSeacrch = React.useRef(false)
-React.useEffect(() =>{
-  if (window.location.search){  
-    const params = qs.parse(window.location.search.substring(1));
-    const sort = optionsTypes.find((obj) => obj.sortProperty === params.sortProperty) 
-    
-   dispatch(
-    setFilters({
-    ...params,
-    sort
-    })
-   );
-   isSeacrch.current = true 
-  }
-}, [])
-
+ 
 async function getPizzas(){
   
   const order = sort.sortProperty.includes("-") ? 'asc' : 'desc'
@@ -66,26 +53,19 @@ async function getPizzas(){
   
 
     dispatch(
-        // @ts-ignore
       fetchPizzas({
       sortBy,
       order,  
       category,
       search,
-      currentPage
-    }))
+      currentPage: String(currentPage)
+    })
     
-  }
-  
+    )
+};
 
 
-React.useEffect(() =>{
-  if(!isSeacrch.current){
-    getPizzas()
-  }
-isSeacrch.current = false
-}, [categoryId, sort.sortProperty, searchValue, currentPage]);
-
+// 1. Вшивание параметров фильтрации и/или сортировки в адресную строку при их изменении
 React.useEffect(() =>{
   if (isMounted.current){
     const quryString = qs.stringify({
@@ -97,6 +77,57 @@ React.useEffect(() =>{
   }
   isMounted.current = true 
 }, [categoryId, sort.sortProperty, searchValue, currentPage])
+
+// 2. Парсинг заданных параметров фильтрации и/или сортировки и сохранение их в Редакс
+React.useEffect(() => {
+  if (window.location.hash === "#/") {
+    window.location.hash.substring(3);
+  } else if (window.location.hash) {
+    const params = qs.parse(
+      window.location.hash.substring(3)
+    ) as unknown as SearchPizzaParams;
+
+    const sort = optionsTypes.find((obj) => obj.sortProperty === params.sortBy)!
+    
+      dispatch(
+      setFilters({
+        currentPage: Number(params.currentPage),
+        categoryId: Number(params.category),
+        sort,
+        searchValue: params.search,
+      })
+    );
+    isSeacrch.current = true;
+  }
+}, []);
+
+// React.useEffect(() =>{
+//   if (window.location.search){  
+//     const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzaParams ;
+//     const sort = optionsTypes.find((obj) => obj.sortProperty === params.sortBy) 
+    
+//    dispatch(
+//     setFilters({
+//     ...params,
+     
+//     sort
+//     })
+//    );
+//    isSeacrch.current = true 
+//   }
+// }, [])
+
+ // 3. Получение пицц
+React.useEffect(() => {
+  if (!isSeacrch.current) {
+    getPizzas();
+  }
+
+  isSeacrch.current = false;
+}, [currentPage, categoryId, sort.sortProperty, searchValue]);
+
+
+
 
 const pizzas = items.map((obj:any) => <Link to={`/pizza/${obj.id}`} key={obj.id}><PizzaBlock  {...obj}/> </Link> )
 const onChangeCategory = (id:any)=>{
@@ -113,7 +144,7 @@ const skeletons =  [...new Array(4)].map((_, index) => <Skeleton key={index} />)
           <Categories  
           categoryId={categoryId}
           onChangeCategory={(id) => onChangeCategory(id)}
-/>
+/>  {  /*@ts-ignore*/ }
           <Sort />
         
         </div>

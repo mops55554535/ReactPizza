@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
 import styles from "./Sort.module.scss";
 import {useSelector, useDispatch} from "react-redux"
-import { setSort } from "../../Redux/slices/filterSlice";
+import { Sort, selectedSort, setSort, sortPropertyEnum } from "../../Redux/slices/filterSlice";
 import { TypeElement } from "typescript";
 
 type SortItem = {
   name: string,
-  sortProperty: string
+  sortProperty: sortPropertyEnum
 }
 type IState = {
   state: any
@@ -14,12 +14,12 @@ type IState = {
   sort: any
 }
 export const optionsTypes:SortItem[] = [
-  {name : "популярности(DESC)", sortProperty: 'rating'},
-  {name : "популярности(ABS)", sortProperty: '-title'},
-  {name : "цене(DESC)", sortProperty: 'price'},
-  {name : "цене(ASC)", sortProperty: '-price'},
-  {name : "алфавиту(DESC)", sortProperty: 'title'},
-  {name : "алфавиту(ACS)", sortProperty: '-title'},
+  {name : "популярности(DESC)", sortProperty: sortPropertyEnum.RAITING_DESC},
+  {name : "популярности(ABS)", sortProperty: sortPropertyEnum.RAITING_ASC},
+  {name : "цене(DESC)", sortProperty:sortPropertyEnum.PRICE_DESC},
+  {name : "цене(ASC)", sortProperty: sortPropertyEnum.PRICE_ASC},
+  {name : "алфавиту(DESC)", sortProperty: sortPropertyEnum.TITLE_DESC},
+  {name : "алфавиту(ACS)", sortProperty: sortPropertyEnum.TITLE_ASC}
    
 ];
 type Isort = {
@@ -31,9 +31,9 @@ type PopupClick = MouseEvent & {
   path: Node[]
 } 
 
-function Sort() {
+const SortPopup: React.FC = () => {
   const dispatch = useDispatch()
-  const sort:any = useSelector<IState>(state => state.filter.sort)
+  const sort:any = useSelector(selectedSort)
   const sortRef = React.useRef<HTMLDivElement>(null)
   const [open, setOpen] = React.useState(false);
 
@@ -46,11 +46,11 @@ function Sort() {
     setOpen(false);
   };
   React.useEffect(()=>{
-    const handleClick = (e: MouseEvent) =>{
-      const _event = e as PopupClick
-       if(sortRef.current && !_event.path.includes(sortRef.current)){
-        setOpen(false)
-       }
+    const handleClick = (event: MouseEvent) =>{
+      const _event = event as PopupClick
+      if (sortRef.current && !_event.composedPath().includes(sortRef.current)) {
+        setOpen(false);
+      }
       }
       document.body.addEventListener('click', handleClick)
       return() =>{
@@ -96,4 +96,4 @@ function Sort() {
   );
 }
 
-export default Sort;
+export default SortPopup;

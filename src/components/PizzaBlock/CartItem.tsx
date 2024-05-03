@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { addItem, removeItem,minusItem, clearItems } from "../../Redux/slices/cartSlice";
+import { addItem, removeItem,minusItem, clearItems, CartItemSlice } from "../../Redux/slices/cartSlice";
 
 import styles from "./CartItem.module.scss";
 
@@ -23,7 +23,7 @@ const CartItem:React.FC<CartItemProps> =  ({ id, title,sizes, type, size, price,
     dispatch(
       addItem({
         id,
-      })
+      }as CartItemSlice)
     );
   };
 

@@ -22,10 +22,7 @@ export const optionsTypes:SortItem[] = [
   {name : "алфавиту(ACS)", sortProperty: sortPropertyEnum.TITLE_ASC}
    
 ];
-type Isort = {
-  sort:any
-  
-}
+
 
 type PopupClick = MouseEvent & {
   path: Node[]

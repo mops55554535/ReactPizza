@@ -29,8 +29,7 @@ const Home = () => {
  const dispatch = useAppDispatch()
 const navigate = useNavigate()
 
- const { categoryId, sort, currentPage, searchValue } =
- useSelector(selectFilter);
+ const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter);
 
 
   const isMounted = React.useRef(false) 
@@ -88,7 +87,7 @@ React.useEffect(() => {
     ) as unknown as SearchPizzaParams;
 
     const sort = optionsTypes.find((obj) => obj.sortProperty === params.sortBy)!
-    
+
       dispatch(
       setFilters({
         currentPage: Number(params.currentPage),
@@ -144,7 +143,7 @@ const skeletons =  [...new Array(4)].map((_, index) => <Skeleton key={index} />)
           <Categories  
           categoryId={categoryId}
           onChangeCategory={(id) => onChangeCategory(id)}
-/>  {  /*@ts-ignore*/ }
+/>  
           <Sort />
         
         </div>
@@ -161,8 +160,8 @@ const skeletons =  [...new Array(4)].map((_, index) => <Skeleton key={index} />)
             </div>
             ): (status==='loading' ? skeletons : pizzas) }
         </div>  
-        {  /*@ts-ignore*/ }
-       <Pagination  pageCurrent={currentPage} onChangePage={onChangePage}  />
+        
+       <Pagination  currentPage={currentPage} onChangePage={onChangePage}  />
        {/* onChangePage={(number) => setCurrentPage(number)} */}
     </div>
   )

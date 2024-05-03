@@ -14,7 +14,7 @@ export enum sortPropertyEnum {
 
 export interface Sort{
   name: string
-  sortProperty:  "rating" | "title" | "price" | "-rating" | "-title" | "-price";
+  sortProperty:  sortPropertyEnum;
 }
 export interface FilterSliceState{
   categoryId: number,
@@ -47,7 +47,7 @@ const filterSlice = createSlice({
       state.searchValue = action.payload;
     },
     setSort(state, action: PayloadAction<Sort>) {
-       /*@ts-ignore*/ 
+     
     
       state.sort = action.payload;
     },
@@ -58,8 +58,8 @@ const filterSlice = createSlice({
     setFilters(state, action:PayloadAction<FilterSliceState>) {
       state.currentPage = Number(action.payload.currentPage);
       state.categoryId = Number(action.payload.categoryId);
-          /*@ts-ignore*/ 
-      state.sortTypeObj = action.payload.sort;
+          
+      state.sort = action.payload.sort;
     },
     
   },

@@ -53,7 +53,7 @@ const filterSlice = createSlice({
     },
     setPageCurrent(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
-      console.log(state.currentPage)
+     
     },
     setFilters(state, action:PayloadAction<FilterSliceState>) {
       state.currentPage = Number(action.payload.currentPage);

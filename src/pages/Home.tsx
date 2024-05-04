@@ -129,9 +129,9 @@ React.useEffect(() => {
 
 
 const pizzas = items.map((obj:any) => <Link to={`/pizza/${obj.id}`} key={obj.id}><PizzaBlock  {...obj}/> </Link> )
-const onChangeCategory = (id:any)=>{
+const onChangeCategory = React.useCallback((id: number)=>{
   dispatch(setCategoryId(id))
-}
+}, [])
 
 
 
@@ -140,6 +140,7 @@ const skeletons =  [...new Array(4)].map((_, index) => <Skeleton key={index} />)
   return (
     <div>
          <div className={styles.layout1}>
+          
           <Categories  
           categoryId={categoryId}
           onChangeCategory={(id) => onChangeCategory(id)}

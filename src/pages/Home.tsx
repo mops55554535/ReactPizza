@@ -1,8 +1,8 @@
 import React, { useEffect, useState} from "react";
 
 import {useSelector, useDispatch} from "react-redux"
-import { selectFilter, setCategoryId } from "../Redux/slices/filterSlice";
-import {setFilters} from '../Redux/slices/filterSlice'
+import { setCategoryId } from "../Redux/filter/slice";
+import {setFilters} from '../Redux/filter/slice'
 
 import axios  from "axios";
 import qs from "qs";
@@ -19,10 +19,15 @@ import Pagination from "../Pagination";
 
 
 import styles from "./Home.module.scss";
-import { fetchPizzas, SearchPizzaParams, selectPizzaData } from "../Redux/slices/pizzaSlice";
 
-import {setPageCurrent} from "../Redux/slices/filterSlice";
+
+
 import { useAppDispatch } from "../Redux/Store";
+import { selectPizzaData } from "../Redux/pizza/selectors";
+import { setPageCurrent } from "../Redux/filter/slice";
+import { fetchPizzas } from "../Redux/pizza/asyncActions";
+import { SearchPizzaParams } from "../Redux/pizza/types";
+import { selectFilter } from "../Redux/filter/selectors";
 
 
 const Home = () => {

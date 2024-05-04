@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./PizzaBlock.module.scss";
-{  /*@ts-ignore*/ }
-import { addItem, selectCartItemById } from "../../Redux/slices/cartSlice";
+
+import { addItem } from "../../Redux/cart/slice";
 
 import {useSelector, useDispatch} from "react-redux"
-{  /*@ts-ignore*/ }
-import { CartItem } from "../../Redux/slices/cartSlice";
+import { CartItemSlice } from "../../Redux/cart/types";
+import { selectCartItemById } from "../../Redux/cart/selectors";
+
 
 type PizzaBlockProps = {
   id:string,
@@ -22,8 +23,8 @@ type PizzaBlockProps = {
 
 const PizzaBlock:React.FC<PizzaBlockProps> = ({id, title, price, imgUrl, sizes, types }) => {
   const dispatch = useDispatch()
-
-  const cartItem:CartItem = useSelector(selectCartItemById(id))
+//@ts-ignore//
+  const cartItem:CartItemSlice = useSelector(selectCartItemById(id))
 
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
@@ -32,12 +33,12 @@ const PizzaBlock:React.FC<PizzaBlockProps> = ({id, title, price, imgUrl, sizes, 
   const addedCount = cartItem ? cartItem.count : 0
 
   const onClickAdd= () =>{
-    const item: CartItem ={
+    const item: CartItemSlice ={
       id,
       title,
       price,
       imgUrl,
-      type: typeNames[activeType],
+      type: Number(typeNames[activeType]),
       size: sizes[activeSize],
       count: 0
     }

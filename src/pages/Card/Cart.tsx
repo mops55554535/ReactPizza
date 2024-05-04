@@ -6,8 +6,9 @@ import styles from "./Cart.module.scss";
 import {useSelector, useDispatch} from "react-redux"
 import CartItem from '../../components/PizzaBlock/CartItem';
 import CartEmpty from '../../components/CardEmpty';
+import { selectCart } from '../../Redux/cart/selectors';
+import { clearItems } from "../../Redux/cart/slice";
 
-import { clearItems, selectCart } from "../../Redux/slices/cartSlice";
 
 function Cart() {
   const dispatch = useDispatch();

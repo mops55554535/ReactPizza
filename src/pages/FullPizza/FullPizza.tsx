@@ -1,7 +1,7 @@
 import React from 'react'
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from 'axios'
-// import style from './FullPizza.module.scss';
+import style from './FullPizza.module.scss';
 
 function FullPizza() {
   const [pizza, setPizza] = React.useState<{
@@ -28,14 +28,19 @@ React.useEffect(()=>{
     FetchPizza()
   }, []) 
 if(!pizza){
-  return 'Loading...'
+  return 'Loading pizza'
 }
   return (
     <div>
       <img src={pizza.imgUrl} />
       <h2> {pizza.title}</h2>
       <h4>{pizza.price}</h4>
-
+      <Link to ="/">
+          <button>
+                <div className={style.text}>назад</div>
+            
+              </button>
+              </Link>
     </div>
   )
 }

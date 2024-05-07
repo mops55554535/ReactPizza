@@ -31,6 +31,7 @@ const initialState: CartSliceState = {
       }
 
       state.totalPrice = calcTotalPrice(state.items)
+    
     },
 
     minusItem(state, action: PayloadAction<string>) {

@@ -5,17 +5,31 @@
   justify-content: space-between;
   padding-bottom: 20px;
   margin-bottom: 30px;
+  a{
+    @media screen and (max-width: 1024px) {
+      margin-top: 20px;
+       
+        margin: 0 auto;
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    margin-top: 20px;
+      flex-direction: column;
+      margin: 0 auto;
+    
+  }
 
   @media screen and (max-width: 710px) {
     flex-direction: column;
   }
 
+  
   .info {
     display: flex;
 
     @media screen and (max-width: 710px) {
       justify-content: space-between;
-      margin-bottom: 40px;
+     
     }
     @media screen and (max-width: 470px) {
       flex-direction: column;
@@ -28,7 +42,7 @@
       margin-right: 20px;
       margin-top: auto;
       margin-bottom: auto;
-
+    
       @media screen and (max-width: 470px) {
         justify-content: center;
         margin-right: 0;
@@ -63,11 +77,22 @@
     color: $white;
     border-radius: 10px;
     max-height: 35px;
-
+    @media screen and (max-width: 1024px) {
+     display: flex;
+     
+      margin: 0 auto;
+      text-align: center;
+      margin-top:20px;
+      width: 100%;
+      padding: 10px 0px;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
     @media screen and (max-width: 710px) {
       justify-content: center;
       max-height: none;
       margin: 0 auto;
+      margin-top:20px;
     }
     .cardLink{
       display: flex;

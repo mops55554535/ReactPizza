@@ -131,9 +131,9 @@ React.useEffect(() => {
 }, [currentPage, categoryId, sort.sortProperty, searchValue]);
 
 
+console.log(items)
 
-
-const pizzas = items.map((obj:any) => <Link to={`/pizza/${obj.id}`} key={obj.id}><PizzaBlock  {...obj}/> </Link> )
+const pizzas = items.map((obj:any) => <PizzaBlock  {...obj}/> )
 const onChangeCategory = React.useCallback((id: number)=>{
   dispatch(setCategoryId(id))
 }, [])

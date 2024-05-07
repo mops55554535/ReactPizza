@@ -8,6 +8,7 @@ function FullPizza() {
     imgUrl: string,
     title: string,
     price: number,
+    desc: string
   }>() 
   const {id} = useParams();
   const navigate = useNavigate();
@@ -31,16 +32,15 @@ if(!pizza){
   return 'Loading pizza'
 }
   return (
-    <div>
-      <img src={pizza.imgUrl} />
-      <h2> {pizza.title}</h2>
-      <h4>{pizza.price}</h4>
-      <Link to ="/">
-          <button>
-                <div className={style.text}>назад</div>
-            
-              </button>
-              </Link>
+    <div className={style.container}>
+      <div className={style.container_sub}>
+       <img className={style.imgUrl} src={pizza.imgUrl} />
+      <h2 className={style.title}>  {pizza.title}</h2>
+      <h4 className={style.price}>  {pizza.price}</h4>
+      <h4 className={style.desc}>  {pizza.desc}</h4>
+      <Link to ="/"><div className={style.buttonBack}>назад</div></Link>
+    </div>
+     
     </div>
   )
 }

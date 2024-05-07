@@ -1,6 +1,6 @@
 @import "../../scss/variables";
-.add {
-          button {
+
+.buttonBack {
             display: flex;
             gap: 5px;
             align-items: center;
@@ -8,16 +8,23 @@
             border-radius: 10px;
             color: $red;
             padding: 10px;
-
-            .plus {
-              display: flex;
-              align-items: center;
-
-              svg {
-                path {
-                  fill: $red;
-                }
-              }
-            }
+            max-width: 50px;
           }
+
+.container {
+}
+.container_sub{
+  
+}
+.imgUrl{
+
+}
+.title{
+
+}
+.price{
+
+}
+.desc{
+  
 }

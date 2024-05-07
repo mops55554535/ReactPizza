@@ -6,6 +6,7 @@ import { addItem } from "../../Redux/cart/slice";
 import {useSelector, useDispatch} from "react-redux"
 import { CartItemSlice } from "../../Redux/cart/types";
 import { selectCartItemById } from "../../Redux/cart/selectors";
+import { Link } from "react-router-dom";
 
 
 type PizzaBlockProps = {
@@ -13,7 +14,7 @@ type PizzaBlockProps = {
   title: string,
   sizes: number[],
   types: number[],
-  
+  desc: string,
   price: number,
  
   imgUrl:string
@@ -21,9 +22,9 @@ type PizzaBlockProps = {
 }
 
 
-const PizzaBlock:React.FC<PizzaBlockProps> = ({id, title, price, imgUrl, sizes, types }) => {
+const PizzaBlock:React.FC<PizzaBlockProps> = ({id, title, price,desc, imgUrl, sizes, types }) => {
   const dispatch = useDispatch()
-//@ts-ignore//
+//@ts-ignore
   const cartItem:CartItemSlice = useSelector(selectCartItemById(id))
 
   const [activeType, setActiveType] = React.useState(0);
@@ -31,14 +32,17 @@ const PizzaBlock:React.FC<PizzaBlockProps> = ({id, title, price, imgUrl, sizes, 
   const typeNames = ["тонкое", "традиционное"]; 
 
   const addedCount = cartItem ? cartItem.count : 0
+console.log(typeNames[activeType])
 
   const onClickAdd= () =>{
     const item: CartItemSlice ={
       id,
       title,
+      desc,
       price,
       imgUrl,
-      type: Number(typeNames[activeType]),
+      types: typeNames[activeType],
+      
       size: sizes[activeSize],
       count: 0
     }
@@ -47,6 +51,7 @@ const PizzaBlock:React.FC<PizzaBlockProps> = ({id, title, price, imgUrl, sizes, 
   return (
     <div className={styles.pizzaBlock}>
       <div className={styles.info}>
+     
         <div className={styles.about}>
           <div className={styles.image}>
             <img src={imgUrl} className={styles.PizzaImg} alt="Pizza" />
@@ -112,9 +117,11 @@ const PizzaBlock:React.FC<PizzaBlockProps> = ({id, title, price, imgUrl, sizes, 
                 <div className={styles.text}>Добавить</div>
                { addedCount > 0 && <div className={styles.indicator}>{addedCount}</div>}
               </button>
+               <Link className={styles.infoBtn} to={`/pizza/${id}`} key={id}>Подробнее</Link>
             </div>
           </div>
         </div>
+       
       </div>
     </div>
   );

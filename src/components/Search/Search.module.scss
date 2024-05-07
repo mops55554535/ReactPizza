@@ -1,7 +1,11 @@
 @import '../../scss/variables';
 .root {
   position: relative;
-
+  @media screen and (max-width: 1024px) {
+    width: 300px;
+    margin: 0 auto;
+    margin-top:20px
+    }
   .search {
     width: 24px;
     height: 24px;

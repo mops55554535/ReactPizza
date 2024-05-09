@@ -1,7 +1,7 @@
 {
   "name": "react-pizza-v2",
   "version": "0.1.0",
-  "homepage": "https://react-pizza-v2.github.io",
+  "homepage": "https://mops55554535.github.io/reactPizza",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
